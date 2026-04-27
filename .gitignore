@@ -1,0 +1,27 @@
+# Byggfiler
+*.iml
+.gradle
+/local.properties
+/.idea
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Android
+**/build/
+**/local.properties
+*.ap_
+*.apk
+*.aab
+
+# Keystore
+*.jks
+*.keystore
+
+# Loggfiler
+*.log
+
+# OS-filer
+.DS_Store
+Thumbs.db

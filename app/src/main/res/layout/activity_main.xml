@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Titel -->
+    <TextView
+        android:id="@+id/SmartFridgeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="Smart Fridge"
+        android:textColor="#FF2900"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp" />
+
+    <!-- IP-rad -->
+    <TextView
+        android:id="@+id/ipLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IP:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/SmartFridgeTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp" />
+
+    <EditText
+        android:id="@+id/ipInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="10.0.2.2"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="@+id/ipLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/ipLabel"
+        app:layout_constraintStart_toEndOf="@+id/ipLabel"
+        app:layout_constraintEnd_toStartOf="@+id/saveButton"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Port-rad -->
+    <TextView
+        android:id="@+id/portLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Port:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/ipLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/portInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="5100"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="@+id/portLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/portLabel"
+        app:layout_constraintStart_toEndOf="@+id/portLabel"
+        app:layout_constraintEnd_toStartOf="@+id/saveButton"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Spara-knapp, centrerad bredvid båda fälten -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spara"
+        app:layout_constraintTop_toTopOf="@+id/ipLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/portLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp" />
+
+    <!-- Login-knapp -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@+id/portLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Navigeringsknappar -->
+    <Button
+        android:id="@+id/askButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fråga"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/listButton"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/listButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/askButton"
+        app:layout_constraintEnd_toStartOf="@+id/recipieButton"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/recipieButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recept"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="40dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
