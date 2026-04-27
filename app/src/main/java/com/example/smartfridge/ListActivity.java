@@ -88,8 +88,6 @@ public class ListActivity extends AppCompatActivity {
      * @param list
      * @return
      * Tar listan (en lång sträng), tar mort mellanslag med trim, delar upp den långa strängen med split och lägger de enskillda varorna i en array.
-     * Från: " milk (1), egg (12), butter (1)"
-     * Till: ["milk (1)", "egg (12)", "butter (1)"]
      * Kollar ifall det vi söker efter finns i listan
      */
     private int findAmountInList(String toSearch, String list){
