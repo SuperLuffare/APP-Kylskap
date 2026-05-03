@@ -1,9 +1,8 @@
+
 package com.example.smartfridge;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -12,24 +11,12 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-
 
 public class AskActivity extends AppCompatActivity {
     private TextView userOutput;
     private EditText userInput;
     private AskHandler askHandler;
 
-    /**
-     *
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
-     *
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,28 +30,74 @@ public class AskActivity extends AppCompatActivity {
 
         ButtonBuilder.setupNavigationButtons(this);
 
-        // Överskriver ButtonBuilders lyssnare och aktiverar knappen
         Button askBtn = findViewById(R.id.askButton);
         askBtn.setEnabled(true);
         askBtn.setOnClickListener(v -> handleText(v));
 
         Button backBtn = findViewById(R.id.backButton);
         backBtn.setOnClickListener(v -> finish());
+
+        // NYTT (snabbknappar)
+        Button btnMilk = findViewById(R.id.btnMilk);
+        Button btnEggs = findViewById(R.id.btnEggs);
+        Button btnJuice = findViewById(R.id.btnJuice);
+
+        btnMilk.setOnClickListener(v -> sendQuick("milk"));
+        btnEggs.setOnClickListener(v -> sendQuick("eggs"));
+        btnJuice.setOnClickListener(v -> sendQuick("juice"));
     }
+
     public void handleText(View v) {
         String message = userInput.getText().toString();
+
+        if (message.trim().isEmpty()) {
+            userOutput.setText("Skriv in en vara");
+            return;
+        }
 
         userInput.setText("");
         hideKeyBoard(v);
 
+        Button askBtn = findViewById(R.id.askButton);
+        askBtn.setEnabled(false);
+
+        userOutput.setText("Loading...");
+
         askHandler.sendMessage(message, response -> {
             runOnUiThread(() -> {
-                userOutput.setText(response);
+
+                if (response.startsWith("ERROR")) {
+                    userOutput.setText("Kunde inte ansluta till servern");
+                } else {
+                    userOutput.setText(response);
+                }
+
+                askBtn.setEnabled(true);
             });
         });
 
         userInput.clearFocus();
     }
+
+    private void sendQuick(String product) {
+        Button askBtn = findViewById(R.id.askButton);
+        askBtn.setEnabled(false);
+
+        userOutput.setText("Loading...");
+
+        askHandler.sendMessage(product, response -> {
+            runOnUiThread(() -> {
+                if (response.startsWith("ERROR")) {
+                    userOutput.setText("Kunde inte ansluta till servern");
+                } else {
+                    userOutput.setText(response);
+                }
+
+                askBtn.setEnabled(true);
+            });
+        });
+    }
+
     public void hideKeyBoard(View v){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if(imm != null){
