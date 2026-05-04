@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 public class AskHandler {
     private static String serverIP = "10.0.2.2";
     private static int port = 5100;
-    private String securityKey;
+    private String securityKey = "kylskåp";
 
     /**
      * Ny ip och port. Användaren skriver in

@@ -40,13 +40,14 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="8dp" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/listSearchinput"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="sök vara..."
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:completionThreshold="1"/>
 
             </LinearLayout>
 

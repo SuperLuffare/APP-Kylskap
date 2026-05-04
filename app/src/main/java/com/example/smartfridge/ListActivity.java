@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class ListActivity extends AppCompatActivity {
     private AskHandler askHandler;
@@ -32,6 +37,16 @@ public class ListActivity extends AppCompatActivity {
         TextView listContent = findViewById(R.id.listContent);
         listContent.setText("Loading..."); // NYTT
 
+        AutoCompleteTextView searchInput = findViewById(R.id.listSearchinput);
+        TextView searchResult = findViewById(R.id.searchResult);
+
+        ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                new ArrayList<>()
+        );
+        searchInput.setAdapter(autocompleteAdapter);
+
         askHandler.sendMessage("LIST", response -> {
             runOnUiThread(() -> {
 
@@ -45,25 +60,23 @@ public class ListActivity extends AppCompatActivity {
                     listContent.setText(formatted);
                     currentList = response;
                     listHistory.saveListToHistory(response);
+
+                    List<String> itemName = extractItemNames(response);
+                    autocompleteAdapter.clear();
+                    autocompleteAdapter.addAll(itemName);
                 } else {
                     listContent.setText("Kunde inte ansluta till servern."); // NYTT
                 }
             });
         });
 
-        EditText searchInput = findViewById(R.id.listSearchinput);
-        TextView searchResult = findViewById(R.id.searchResult);
-
         searchInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void afterTextChanged(Editable s) {}
 
-            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -113,5 +126,19 @@ public class ListActivity extends AppCompatActivity {
             }
         }
         return 0;
+    }
+    private List<String> extractItemNames(String list){
+        List<String> names = new ArrayList<>();
+        if(list == null || list.isEmpty())return names;
+        for(String item : list.split(",")){
+            String[] parts = item.trim().split("\\(");
+            if(parts.length >= 1){
+                String name = parts[0].trim();
+                if(!name.isEmpty()){
+                    names.add(name);
+                }
+            }
+        }
+        return names;
     }
 }
