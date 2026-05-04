@@ -20,6 +20,7 @@ public class ListActivity extends AppCompatActivity {
      *     previously being shut down then this Bundle contains the data it most
      *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
      * @author Jakob
+     * @author Sana
      *
      */
     @Override
@@ -30,20 +31,28 @@ public class ListActivity extends AppCompatActivity {
         askHandler = new AskHandler();
         listHistory = new ListHistory(this);
 
+        TextView listContent = findViewById(R.id.listContent);
+        listContent.setText("Loading..."); // NYTT
 
         askHandler.sendMessage("LIST", response -> {
             runOnUiThread(() -> {
-                TextView listContent = findViewById(R.id.listContent);
-                if (response != null && !response.equals("Connection failed")) {
+
+                if (response == null) { // NYTT
+                    listContent.setText("Ingen data"); // NYTT
+                    return; // NYTT
+                }
+
+                if (!response.startsWith("ERROR")) { // NYTT
                     String formatted = response.replace(",", "\n");
                     listContent.setText(formatted);
                     currentList = response;
                     listHistory.saveListToHistory(response);
                 } else {
-                    listContent.setText("Kunde inte hämta listan.");
+                    listContent.setText("Kunde inte ansluta till servern."); // NYTT
                 }
             });
         });
+
         EditText searchInput = findViewById(R.id.listSearchinput);
         TextView searchResult = findViewById(R.id.searchResult);
 
@@ -70,10 +79,8 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> finish());
-
 
         FloatingActionButton historyBtn = findViewById(R.id.viewHistoryButton);
         historyBtn.setOnClickListener(view -> {
@@ -91,7 +98,7 @@ public class ListActivity extends AppCompatActivity {
      * Kollar ifall det vi söker efter finns i listan
      */
     private int findAmountInList(String toSearch, String list){
-        if(list.isEmpty())return 0;
+        if(list == null || list.isEmpty()) return 0; // NYTT
         String[] items = list.split(",");
         for(String item : items){
             String[] parts = item.trim().split("\\(");
