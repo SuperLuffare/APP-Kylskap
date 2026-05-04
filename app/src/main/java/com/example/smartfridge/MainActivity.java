@@ -10,6 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private Button disabledButton = null;
 
+    /**
+     * Skapar main activity och använder ButtonBuilder för att sätta upp navigationsknapparna
+     * @param savedInstanceState
+     * @author Jakob
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Stänger av knapparna
+     * @param v View
+     * @author Jakob
+     */
     public void disable(View v) {
         if (disabledButton != null) {
             disabledButton.setEnabled(true);

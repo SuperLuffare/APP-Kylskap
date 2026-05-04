@@ -11,12 +11,23 @@ public class AskHandler {
     private static int port = 5100;
     private String securityKey;
 
+    /**
+     * Ny ip och port. Användaren skriver in
+     * @param ip
+     * @param newPort
+     */
     public static void setConnection(String ip, int newPort) {
         serverIP = ip;
         port = newPort;
 
     }
 
+    /**
+     * Skickar meddelande till servern
+     * @param message
+     * @param callback
+     * @author Jakob
+     */
     public void sendMessage(String message, Consumer<String> callback) {
         new Thread(() -> {
             try (Socket socket = new Socket(serverIP, port);

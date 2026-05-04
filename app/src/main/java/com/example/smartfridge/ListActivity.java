@@ -16,9 +16,7 @@ public class ListActivity extends AppCompatActivity {
 
     /**
      * Hämta listan från servern. Formatera listan vi får från servern så att det är en vara per rad. Vi byter bort "," med "\n" (ny rad)
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @param savedInstanceState
      * @author Jakob
      * @author Sana
      *
@@ -90,12 +88,12 @@ public class ListActivity extends AppCompatActivity {
     }
 
     /**
-     * test test
-     * @param toSearch
-     * @param list
-     * @return
      * Tar listan (en lång sträng), tar mort mellanslag med trim, delar upp den långa strängen med split och lägger de enskillda varorna i en array.
      * Kollar ifall det vi söker efter finns i listan
+     * @param toSearch
+     * @param list
+     * @return antal
+     * @author Jakob
      */
     private int findAmountInList(String toSearch, String list){
         if(list == null || list.isEmpty()) return 0; // NYTT

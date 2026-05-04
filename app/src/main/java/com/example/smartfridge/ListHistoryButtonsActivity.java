@@ -16,6 +16,13 @@ public class ListHistoryButtonsActivity extends AppCompatActivity {
     private LinearLayout buttonContainer;
     private AskHandler askHandler;
 
+    /**
+     * Skapar sidan för historikknapparna
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     * @author Jakob
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,12 @@ public class ListHistoryButtonsActivity extends AppCompatActivity {
         List<String> history = readHistory();
         createButtons(history);
     }
+
+    /**
+     * Läser History.txt
+     * @return lista med historiken
+     * @author Jakob
+     */
     private List<String> readHistory(){
         List<String> history = new ArrayList<>();
         try{
@@ -44,6 +57,12 @@ public class ListHistoryButtonsActivity extends AppCompatActivity {
         }
         return history;
     }
+
+    /**
+     * Skapar en ny knapp för varje rad i historik.txt
+     * @param history
+     * @author Jakob
+     */
     private void createButtons(List<String> history){
         if(history.isEmpty()){
             Button btn = new Button(this);

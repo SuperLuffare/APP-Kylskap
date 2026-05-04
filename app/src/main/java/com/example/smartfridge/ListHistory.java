@@ -20,6 +20,14 @@ public class ListHistory {
         this.context = context;
 
     }
+
+    /**
+     * Sparar den nuvarande listan till historiken
+     * Sparar bara ifall listan inte är samma som förra listan som sparades
+     * Kollar vilken tid listan sparas
+     * @param data
+     * @author Jakob
+     */
     public void saveListToHistory(String data) {
         List<String> history = readHistory();
         if (!history.isEmpty()) {
@@ -37,6 +45,12 @@ public class ListHistory {
         }
         writeHistory(history);
     }
+
+    /**
+     * Läser History.txt
+     * @return lista med varor
+     * @author Jakob
+     */
     private List<String> readHistory(){
         List<String> history = new ArrayList<>();
             try {
@@ -53,6 +67,12 @@ public class ListHistory {
             }
             return history;
         }
+
+    /**
+     * Skriver in den nuvarande listan till History.txt
+     * @param history list<String>
+     * @author Jakob
+     */
     private void writeHistory(List<String> history) {
         try {
             FileOutputStream fos = context.openFileOutput("History.txt", Context.MODE_PRIVATE);

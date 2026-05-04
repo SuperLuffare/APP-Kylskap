@@ -17,6 +17,11 @@ public class AskActivity extends AppCompatActivity {
     private EditText userInput;
     private AskHandler askHandler;
 
+    /**
+     * Skapar Askactivity sidan och lägger till alla knappar och textfält
+     * @param savedInstanceState
+     * @author Jakob och Sana
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,11 @@ public class AskActivity extends AppCompatActivity {
         btnJuice.setOnClickListener(v -> sendQuick("juice"));
     }
 
+    /**
+     * Tar det användaren skriver in och skickar till servern.
+     * @param v View
+     * @author Jakob
+     */
     public void handleText(View v) {
         String message = userInput.getText().toString();
 
@@ -79,6 +89,11 @@ public class AskActivity extends AppCompatActivity {
         userInput.clearFocus();
     }
 
+    /**
+     * Metod för snabbknapparna. Skickar förfrågan om en vara till servern när användaren trycker på en av knapparna.
+     * @param product String
+     * @author Sana
+     */
     private void sendQuick(String product) {
         Button askBtn = findViewById(R.id.askButton);
         askBtn.setEnabled(false);
@@ -98,6 +113,11 @@ public class AskActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Tar ner tangentbordet från skärmen
+     * @param v View
+     * @author Jakob
+     */
     public void hideKeyBoard(View v){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if(imm != null){
