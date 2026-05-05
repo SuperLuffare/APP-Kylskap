@@ -11,6 +11,10 @@ public class AskHandler {
     private static int port = 5100;
     private String securityKey;
 
+    public AskHandler() { //Nytt
+        this.securityKey = "1234";
+    }
+
     public static void setConnection(String ip, int newPort) {
         serverIP = ip;
         port = newPort;
@@ -25,6 +29,11 @@ public class AskHandler {
 
                 socket.setSoTimeout(5000);
 
+                if (securityKey == null || securityKey.isEmpty()) { //nytt
+                    callback.accept("ERROR: NO_SECURITY_KEY");
+                    return;
+                }
+
                 out.println(securityKey);
                 out.println(message);
 
@@ -37,6 +46,7 @@ public class AskHandler {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace(); // NYTT
                 callback.accept("ERROR: CONNECTION_FAILED");
             }
         }).start();

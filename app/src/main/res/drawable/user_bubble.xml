@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"> <!-- NYTT -->
+    <solid android:color="#DCF8C6"/> <!-- NYTT -->
+    <corners android:radius="16dp"/> <!-- NYTT -->
+    <padding android:left="12dp" android:top="8dp"
+        android:right="12dp" android:bottom="8dp"/> <!-- NYTT -->
+</shape>
