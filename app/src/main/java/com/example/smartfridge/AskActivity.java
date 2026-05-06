@@ -21,6 +21,11 @@ public class AskActivity extends AppCompatActivity {
     private LinearLayout chatContainer; // NYTT
     private ScrollView chatScroll; // NYTT
 
+    /**
+     * Skapar Askactivity sidan och lägger till alla knappar och textfält
+     * @param savedInstanceState
+     * @author Jakob och Sana
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,11 @@ public class AskActivity extends AppCompatActivity {
         btnJuice.setOnClickListener(v -> sendQuick("juice"));
     }
 
+    /**
+     * Tar det användaren skriver in och skickar till servern.
+     * @param v View
+     * @author Jakob
+     */
     public void handleText(View v) {
         String message = userInput.getText().toString();
 
@@ -128,6 +138,11 @@ public class AskActivity extends AppCompatActivity {
         chatScroll.post(() -> chatScroll.fullScroll(View.FOCUS_DOWN));
     }
 
+    /**
+     * Tar ner tangentbordet från skärmen
+     * @param v View
+     * @author Jakob
+     */
     public void hideKeyBoard(View v){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         if(imm != null){

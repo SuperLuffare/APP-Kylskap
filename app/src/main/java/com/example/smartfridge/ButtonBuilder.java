@@ -10,7 +10,7 @@ import com.example.smartfridge.ui.login.LoginActivity;
 public class ButtonBuilder {
 
     /**
-     * Builderklass för att sätta upp navigationsknapparna till aktiviteterna
+     * Builderklass för att sätta upp navigationsknapparna till de olika aktiviteterna
      * @param activity akvivitenen vi är på
      * @author Jakob
      */

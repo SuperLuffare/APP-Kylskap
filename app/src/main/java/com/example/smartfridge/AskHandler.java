@@ -7,9 +7,9 @@ import java.net.Socket;
 import java.util.function.Consumer;
 
 public class AskHandler {
-    private static String serverIP = "10.0.2.2";
+    private static String serverIP = "79.76.34.189";
     private static int port = 5100;
-    private String securityKey;
+    private String securityKey = "kylskåp";
 
     public AskHandler() { //Nytt
         this.securityKey = "1234";
@@ -21,6 +21,12 @@ public class AskHandler {
 
     }
 
+    /**
+     * Skickar meddelande till servern
+     * @param message
+     * @param callback
+     * @author Jakob
+     */
     public void sendMessage(String message, Consumer<String> callback) {
         new Thread(() -> {
             try (Socket socket = new Socket(serverIP, port);

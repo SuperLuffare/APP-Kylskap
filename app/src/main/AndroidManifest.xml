@@ -14,6 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartFridge">
         <activity
+            android:name=".ShoppingListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.SmartFridge" />
+        <activity
+            android:name=".shoppingList"
+            android:exported="false"
+            android:theme="@style/Theme.SmartFridge" />
+        <activity
             android:name=".ListHistoryActivity"
             android:exported="false" />
         <activity

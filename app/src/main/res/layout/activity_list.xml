@@ -40,15 +40,18 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="8dp" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/listSearchinput"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="sök vara..."
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:completionThreshold="1"/>
 
             </LinearLayout>
+
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -70,5 +73,14 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
         android:src="@android:drawable/btn_star_big_on" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shoppingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/stat_notify_more" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
