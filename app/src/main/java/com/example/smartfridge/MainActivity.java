@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button disabledButton = null;
@@ -36,7 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
             if (ip.isEmpty() || portStr.isEmpty()) return;
 
-            int port = Integer.parseInt(portStr);
+            int port; // NYTT
+
+            try { // NYTT
+                port = Integer.parseInt(portStr);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Ogiltig port", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             AskHandler.setConnection(ip, port);
         });
     }
