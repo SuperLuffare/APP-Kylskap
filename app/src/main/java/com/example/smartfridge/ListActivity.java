@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -169,43 +172,75 @@ public class ListActivity extends AppCompatActivity {
     private void showItemDialog(String itemName, int currentAmount){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(itemName.substring(0,1).toUpperCase()+itemName.substring(1));
-        TextView amountText = new TextView(this);
-        amountText.setText("Antal: "+currentAmount);
-        amountText.setTextSize(18);
-        amountText.setGravity(android.view.Gravity.CENTER);
-        amountText.setPadding(0,32,0,32);
-        builder.setView(amountText);
 
-        //Plussknapp
-        builder.setPositiveButton("+ Lägg till", (dialog, which) -> {
-            askHandler.sendMessage("ADD "+itemName, response -> {
-                runOnUiThread(() -> {
-                    if(response.startsWith("ERROR")){
-                        Toast.makeText(this, "Kunde inte lägga till", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, itemName + " lades till", Toast.LENGTH_SHORT).show();
-                        refreshList();
-                    }
-                });
-            });
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(48,32,48,16);
+
+        LinearLayout row = new LinearLayout(this);
+        row.setOrientation(LinearLayout.HORIZONTAL);
+        row.setGravity(Gravity.CENTER);
+
+        Button minusBtn = new Button(this);
+        minusBtn.setText("-");
+
+        TextView amountText = new TextView(this);
+        amountText.setTextSize(22);
+        amountText.setGravity(android.view.Gravity.CENTER);
+        amountText.setMinWidth(120);
+
+        final int[] selectedAmout = {currentAmount};
+        amountText.setText(String.valueOf(selectedAmout[0]));
+
+        Button plusBtn = new Button(this);
+        plusBtn.setText("+");
+
+        minusBtn.setOnClickListener(v -> {
+            if(selectedAmout[0] > 0){
+                selectedAmout[0] --;
+                amountText.setText(String.valueOf(selectedAmout[0]));
+            }
         });
-        //Minusknapp
-        if(currentAmount > 0){
-            builder.setNegativeButton("- Ta bort", (dialog, which) -> {
-                askHandler.sendMessage("REMOVE " + itemName, response ->{
+
+        plusBtn.setOnClickListener(v -> {
+            selectedAmout[0]++;
+            amountText.setText(String.valueOf(selectedAmout[0]));
+        });
+
+        row.addView(minusBtn);
+        row.addView(amountText);
+        row.addView(plusBtn);
+        layout.addView(row);
+
+        builder.setPositiveButton("Spara", (dialog, which) -> {
+            int diff = selectedAmout[0] - currentAmount;
+            if(diff == 0) return;
+            if(diff > 0){
+                askHandler.sendMessage("ADD " + itemName + " " + diff, response ->{
                     runOnUiThread(() -> {
-                        if (response.startsWith("ERROR")) {
-                            Toast.makeText(this, "Kunde inte lägga till", Toast.LENGTH_SHORT).show();
+                        if(response.startsWith("ERROR")){
+                            Toast.makeText(this, "Kunde inte uppdatera", Toast.LENGTH_SHORT).show();;
                         } else {
-                            Toast.makeText(this, itemName + " togs bort", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, itemName + " uppdaterad", Toast.LENGTH_SHORT).show();;
                             refreshList();
                         }
                     });
                 });
-            });
-        }
-        builder.setNeutralButton("Avbryt",(dialog, which) -> dialog.dismiss());
-
+            } else {
+                int toRemove = Math.abs(diff);
+                for(int i = 0; i < toRemove; i++){
+                    askHandler.sendMessage("REMOVE " + itemName, response -> {
+                        runOnUiThread(() -> {
+                            if(response.startsWith("ERROR")){
+                                Toast.makeText(this, "Kunde inte uppdatera", Toast.LENGTH_SHORT).show();;
+                            }
+                        });
+                    });
+                }
+                new android.os.Handler().postDelayed(this::refreshList, 300L * toRemove);
+            }
+        });
+        builder.setNeutralButton("Avbryt", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 

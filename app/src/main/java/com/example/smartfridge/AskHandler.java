@@ -12,7 +12,7 @@ public class AskHandler {
     private String securityKey = "kylskåp";
 
     public AskHandler() { //Nytt
-        this.securityKey = "1234";
+        this.securityKey = "kylskåp";
     }
 
     public static void setConnection(String ip, int newPort) {
