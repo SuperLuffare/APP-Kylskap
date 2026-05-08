@@ -5,12 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tillbaka"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+    <LinearLayout
+        android:id="@+id/quickButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnMilk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mjölk" />
+        <Button
+            android:id="@+id/btnEggs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ägg"
+            android:layout_marginStart="8dp" />
+        <Button
+            android:id="@+id/btnJuice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Juice"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/userInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Skriv din fråga här..."
+        app:layout_constraintTop_toBottomOf="@id/quickButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/askButton"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/askButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fråga"
+        app:layout_constraintTop_toTopOf="@id/userInput"
+        app:layout_constraintBottom_toBottomOf="@id/userInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp" />
+
     <ScrollView
         android:id="@+id/chatScroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/userInput"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/userInput"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -21,67 +82,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </ScrollView>
-
-<EditText
-        android:id="@+id/userInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Skriv din fråga här..."
-        app:layout_constraintTop_toBottomOf="@id/chatScroll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
-
-
-    <Button
-        android:id="@+id/askButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fråga"
-        app:layout_constraintTop_toBottomOf="@id/userInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <LinearLayout
-        android:id="@+id/quickButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/askButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp">
-
-        <Button
-            android:id="@+id/btnMilk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mjölk" />
-
-        <Button
-            android:id="@+id/btnEggs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ägg"
-            android:layout_marginStart="8dp" />
-
-        <Button
-            android:id="@+id/btnJuice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Juice"
-            android:layout_marginStart="8dp" />
-
-    </LinearLayout>
-
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tillbaka"
-        app:layout_constraintTop_toBottomOf="@id/quickButtons"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

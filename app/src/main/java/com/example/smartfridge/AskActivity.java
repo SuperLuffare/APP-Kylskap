@@ -81,8 +81,11 @@ public class AskActivity extends AppCompatActivity {
     }
 
     private void sendQuick(String product) { //nytt
+        android.util.Log.d("DEBUG", "sendQuick anromed med: " + product);
         addMessage(product, true);
+        android.util.Log.d("DEBUG", "addMessage klar");
         sendMessageToServer(product);
+        android.util.Log.d("DEBUG", "sendmessageToServer klar");
     }
 
     private void sendMessageToServer(String message) {
@@ -90,7 +93,9 @@ public class AskActivity extends AppCompatActivity {
         askBtn.setEnabled(false);
 
         askHandler.sendMessage(message, response -> {
+            android.util.Log.d("DEBUG", "svar från servern: " + response);
             runOnUiThread(() -> {
+                android.util.Log.d("DEBUG", "UI Trod körs för respons: " + response);
                 try {
 
                     if (response == null) {
@@ -100,8 +105,9 @@ public class AskActivity extends AppCompatActivity {
                     } else {
                         addMessage(response, false); // NYTT
                     }
-
-                } finally {
+                } catch(Exception e){
+                    android.util.Log.d("DEBUG", "Fel i UI-uppdatering",e);
+                }finally {
                     askBtn.setEnabled(true);
                     scrollToBottom(); // NYTT
                 }
@@ -110,9 +116,11 @@ public class AskActivity extends AppCompatActivity {
     }
 
     private void addMessage(String text, boolean isUser) { // Hela metoden är ny
+        android.util.Log.d("DEBUG", "addMessage körs med text: " + text);
         TextView tv = new TextView(this);
         tv.setText(text);
         tv.setTextSize(16);
+        tv.setTextColor(android.graphics.Color.RED);
         tv.setPadding(24, 16, 24, 16);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

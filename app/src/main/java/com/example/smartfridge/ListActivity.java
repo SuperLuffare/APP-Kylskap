@@ -189,31 +189,31 @@ public class ListActivity extends AppCompatActivity {
         amountText.setGravity(android.view.Gravity.CENTER);
         amountText.setMinWidth(120);
 
-        final int[] selectedAmout = {currentAmount};
-        amountText.setText(String.valueOf(selectedAmout[0]));
+        final int[] selectedAmount = {currentAmount};
+        amountText.setText(String.valueOf(selectedAmount[0]));
 
         Button plusBtn = new Button(this);
         plusBtn.setText("+");
 
         minusBtn.setOnClickListener(v -> {
-            if(selectedAmout[0] > 0){
-                selectedAmout[0] --;
-                amountText.setText(String.valueOf(selectedAmout[0]));
+            if(selectedAmount[0] > 0){
+                selectedAmount[0] --;
+                amountText.setText(String.valueOf(selectedAmount[0]));
             }
         });
 
         plusBtn.setOnClickListener(v -> {
-            selectedAmout[0]++;
-            amountText.setText(String.valueOf(selectedAmout[0]));
+            selectedAmount[0]++;
+            amountText.setText(String.valueOf(selectedAmount[0]));
         });
 
         row.addView(minusBtn);
         row.addView(amountText);
         row.addView(plusBtn);
         layout.addView(row);
-
+        builder.setView(layout);
         builder.setPositiveButton("Spara", (dialog, which) -> {
-            int diff = selectedAmout[0] - currentAmount;
+            int diff = selectedAmount[0] - currentAmount;
             if(diff == 0) return;
             if(diff > 0){
                 askHandler.sendMessage("ADD " + itemName + " " + diff, response ->{
