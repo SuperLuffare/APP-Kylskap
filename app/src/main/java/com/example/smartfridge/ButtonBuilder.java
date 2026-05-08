@@ -22,7 +22,7 @@ public class ButtonBuilder {
             }
         } else {
             Button loginBtn = activity.findViewById(R.id.loginButton);
-            if(loginBtn != null) {
+            if (loginBtn != null) {
                 loginBtn.setOnClickListener(v -> {
                     Intent intent = new Intent(activity, LoginActivity.class);
                     activity.startActivity(intent);
@@ -42,14 +42,6 @@ public class ButtonBuilder {
         if(listButton != null) {
             listButton.setOnClickListener(v -> {
                 Intent intent = new Intent(activity, ListActivity.class);
-                activity.startActivity(intent);
-            });
-        }
-
-        Button recipieButton = activity.findViewById(R.id.recipieButton);
-        if(recipieButton != null) {
-            recipieButton.setOnClickListener(v -> {
-                Intent intent = new Intent(activity, RecipiesActivity.class);
                 activity.startActivity(intent);
             });
         }

@@ -33,9 +33,7 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".RecipiesActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ListActivity"
             android:exported="false"

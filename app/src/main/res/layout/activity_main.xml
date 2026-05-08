@@ -111,16 +111,6 @@
         android:text="Lista"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/askButton"
-        app:layout_constraintEnd_toStartOf="@+id/recipieButton"
-        android:layout_marginBottom="40dp" />
-
-    <Button
-        android:id="@+id/recipieButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recept"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/listButton"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="40dp" />
 
